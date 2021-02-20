@@ -21,7 +21,7 @@ const StatusIndicator = ({ status }) => {
 			break;
 	}
 	return (
-		<div className='rounded-circle p-3 mx-3' style={{width: '10px', height: '10px', background: color}}> 
+		<div className='mx-3' style={{width:'10px', height:'10px', borderRadius: '50%' ,background: color}}> 
 		</div>
 	)
 }

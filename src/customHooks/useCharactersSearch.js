@@ -6,6 +6,7 @@ const useCharactersSearch = (searchTerm, pageNo) => {
 	const [characters, setCharacters] = useState([]);
 	const [hasMore, setHasMore] = useState(true);
 	const [hasError, setHasError] = useState(false);
+	const [errorMsg, setErrorMsg] = useState('');
 
 
 	useEffect(() => {
@@ -30,22 +31,23 @@ const useCharactersSearch = (searchTerm, pageNo) => {
 					}) 
 				});
 
-				console.log(response.data);
-				
+
 				const charactersData = response.data.results;
 				const ch = []
 				for(let i = 0; i < charactersData.length; i++){
-					console.log(charactersData[i]);
 					ch.push(charactersData[i])
 				}
-				console.log('ch' + ch)
 				setCharacters(characters => [...new Set([...characters, ...ch]) ]);
 
 				setHasMore(response.data.info.next !== null);
 				setLoading(false);
 			} catch (err) {
 				if(axios.isCancel(err)) return ;
-				console.log(err);
+				setHasError(true);
+				setLoading(false);
+				if(err.response.status === 404) setErrorMsg('No Character found !');
+				else setErrorMsg('Something Went Wrong ! Try Again.')
+
 			}
 		}
 		getCharactersData();
@@ -53,12 +55,11 @@ const useCharactersSearch = (searchTerm, pageNo) => {
 		// clean up function
 		return () => {
 			cancel();	
-			setHasError(true);
-		};
+	};
 	}, [searchTerm, pageNo]);
 
 
-	return { loading, characters, hasMore, hasError };
+	return { loading, characters, hasMore, hasError, errorMsg };
 }
 
 export default useCharactersSearch;

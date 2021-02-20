@@ -33,7 +33,10 @@ const Characters = ({ characters, loading, error, more, pageNo, setPageNo }) => 
 					name={character.name}
 					status={character.status}
 					species={character.species}
-					image={character.image}/>
+					image={character.image}
+					location={character.location.name}
+					origin={character.origin.name}
+					gender={character.gender}/>
 			);
 						
 	return (
@@ -42,7 +45,10 @@ const Characters = ({ characters, loading, error, more, pageNo, setPageNo }) => 
 			name={character.name}
 			status={character.status}
 			species={character.species}
-			image={character.image}/>);
+			image={character.image}
+			location={character.location.name}
+			origin={character.origin.name}
+			gender={character.gender}/>);
 	});
 
 

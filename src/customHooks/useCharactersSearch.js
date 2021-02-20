@@ -31,7 +31,6 @@ const useCharactersSearch = (searchTerm, pageNo) => {
 					}) 
 				});
 
-
 				const charactersData = response.data.results;
 				const ch = []
 				for(let i = 0; i < charactersData.length; i++){
